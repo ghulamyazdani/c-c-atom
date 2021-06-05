@@ -1,0 +1,22 @@
+//FIND WORDS ENDING WITH 'S'
+#include<iostream>
+#include<conio.h>
+#include<fstream.h>
+#include<string.h>
+int main()
+{
+clrscr();
+ifstream fin;
+fin.open("india.txt") ;
+char words[200] ;
+int count=0,l;
+while(!fin.eof())
+{
+fin>>words;
+l=strlen(words);
+if(words[1-l]=='s')
+count++;
+}
+cout<<"\n\n No. of Words Ending with 's': "<<count<<endl;
+return 0;
+}

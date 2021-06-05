@@ -1,0 +1,41 @@
+//INTERCHANGE VALUES OF ROW AND COLUMN
+#include<iostream>
+#include<conio.h>
+using namespace std;
+int main()
+{
+int a[3][3],trans[3][3],r,c,i,j;
+
+cout<<"\n\n Enter ROW and COLUMN of Matrix: ";
+cin>>r>>c;
+cout<<endl;
+for(i=0;i<r;++i)
+for(j=0;j<c;++j)
+{
+  cout<<"Enter Elements a "<<i<<j<<":" ;
+  cin>>a[i][j];
+}
+  cout<<"Entered Matrix: "<<endl;
+       for(i=0;i<r;++i)
+       for(j=0;j<c;++j)
+
+{
+  cout<<" "<<a[i][j];
+  if(j==c-1)
+    cout<<endl;
+}
+  for(i=0;i<r;++i)
+     for(j=0;j<c;++j)
+{
+  trans[j][i]=a[i][j];
+}
+ cout<<"Transpose of Matrix: " <<endl;
+ for(i=0;i<c;++i)
+ for(j=0;j<r;++j)
+{
+ cout<<" "<<trans[i][j];
+  if(j==r-1)
+    cout<<endl;
+}
+ return 0;
+}

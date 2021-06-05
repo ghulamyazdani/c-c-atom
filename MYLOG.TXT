@@ -1,0 +1,22 @@
+//TO COUNT NUMBER OF BLANK SAPACES IN A FILE
+#include<fstream.h>
+#include<conio.h>
+#include<ctype.h>
+void main()
+{
+clrscr();
+int count=0;
+ifstream fin;
+fin.open("My Log.txt");
+char word;
+while(!fin.eof())
+{
+  fin.get(word);
+  if (word==' ')
+  count++;
+}
+fin.close();
+cout<<"\n\n No. of Blank Spaces in File My Log.txt: " <<count;
+cout<<"\n\n By: KUSH BHARGAV SAH \n XII B";
+getch();
+}
