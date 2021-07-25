@@ -32,6 +32,5 @@ for(int k=0;k<n;k++)
 cout<<a[k]<<"\t";
 }
 cout<<"\n";
-cout<<"\ By KUSH BHARGAV SAH;XII-B";
 }
 
