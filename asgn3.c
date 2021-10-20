@@ -1,36 +1,25 @@
-#include<stdio.h>
-int main()
+#include <stdio.h>
+#include <string.h>
+void main()
 {
-int i,j,n,a[50],frame[10],no,k,avail,count=0;
-printf("ENTER THE NUMBER OF PAGES: ");
-scanf("%d",&n);
-printf("\nENTER THE PAGE NUMBER: ");
-for(i=1;i<=n;i++)
-scanf("%d",&a[i]);
-printf("\nENTER THE NUMBER OF FRAMES: ");
-scanf("%d",&no);
-for(i=0;i<no;i++){
-frame[i]= -1;
-}
-j=0;
-printf("ref string\t page frames\n");
-for(i=1;i<=n;i++)
+char string[100],ptr;
+int c=0,count[26]={0};
+
+printf("Enter a string\n");
+scanf("%[^\t\n]s",string); 
+ptr=string[0];
+
+while (ptr)
 {
-printf("%d\t\t",a[i]);
-avail=0;
-for(k=0;k<no;k++)
-if(frame[k]==a[i])
-avail=1;
-if (avail==0)
+/* Consider characters from 'a' to 'z' only */
+if ( ptr >= 'a' && ptr <= 'z' )
+count[string[c]-'a']++;
+c++;
+ptr++;
+}
+for(c=0;c<26;c++)
 {
-frame[j]=a[i];
-j=(j+1)%no;
-count++;
-for(k=0;k<no;k++)
-printf("%d\t",frame[k]);
+if(count[c]!=0)
+printf("%c occurs %d times in string.\n",c+'a',count[c]);
 }
-printf("\n");
-}
-printf("Page Fault Is %d",count);
-return 0;
 }

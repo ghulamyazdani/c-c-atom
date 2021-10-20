@@ -1,7 +1,6 @@
 #include <iostream>
-using std::string;
 using namespace std;
-class employee{
+class student{
 private:
   string Name;
   string company;
@@ -22,10 +21,10 @@ public:
 
 };
 int main(int argc, char const *argv[]) {
-  employee e1;
-  e1.setName("yAZDANI");
-  std::cout << e1.getName() << '\n';
-  e1.setAge(10);
-  std::cout << e1.getAge() << '\n';
+  student s1;
+  s1.setName("GhulamYazdani");
+  std::cout << s1.getName() << '\n';
+  s1.setAge(10);
+  std::cout << s1.getAge() << '\n';
   return 0;
 }
