@@ -1,57 +1,54 @@
-#include<stdio.h>
-#include<time.h>
-void mergesort(int a[],int i,int j)
+#include <bits/stdc++.h>
+using namespace std;
+int mergeSort(int a[], int l, int h)
 {
-int mid;
-if(i<j)
-{
-mid=(i+j)/2;
-mergesort(a,i,mid);
-mergesort(a,mid+1,j);
-merge(a,i,mid,mid+1,j);
+    int mid;
+    if (l < h)
+    {
+        mid = (l + h) / 2;
+        mergeSort(a, l, mid);
+        mergeSort(a, mid + 1, h);
+        merge(a, l, mid, h);
+    }
+    return 0;
 }
-}
-void merge(int a[],int i1,int j1,int i2,int j2)
+int merge(int a[], int l, int mid, int h)
 {
-int temp[j1+j2];
-int i,j,k;
-i=i1;
-j=i2;
-k=0;
-while(i<=j1 && j<=j2)
-{
-if(a[i]<a[j])
-temp[k++]=a[i++];
-else
-temp[k++]=a[j++];
+    int i = l;
+    int j = mid + 1, k = 0, c[h];
+
+    while (i <= mid && j <= h)
+    {
+        if (a[i] < a[j])
+        {
+            c[k++] = a[i++];
+        }
+    }
+    while (i < mid)
+    {
+        c[k++] = a[i++];
+    }
+    while (j < h)
+    {
+        c[k++] = a[j++];
+    }
+
+    for (k = 0; k < h; k++)
+    {
+        a[k] = c[k];
+    }
 }
-while(i<=j1)
-temp[k++]=a[i++];
-while(j<=j2)
-temp[k++]=a[j++];
-for(i=i1,j=0;i<=j2;i++,j++)
-a[i]=temp[j];
+int display(int a[],int l,int h){
+    for (size_t i = 0; i < h; i++)
+    {
+        cout << a[i] ;
+    }
+    return 0;
 }
-void main()
-{
- clock_t start = clock();
-int i,n;
-double time_taken = 0.0;
-system("cls");
-printf("\n Enter How many Numbers:");
-scanf("%d", &n);
-int a[n];
-for(i=0;i<n;i++)
-a[i]= rand()%100;
-printf("Original array:\n");
-for(i=0;i<n;i++)
-printf("%d ",a[i]);
-mergesort(a,0,n-1);
-printf("\nSorted array is :\n");
-for(i=0;i<n;i++)
-printf("%d ",a[i]);
-clock_t end = clock();
-time_taken = (double)(end-start)/CLOCKS_PER_SEC;
-printf("\nTime taken = %f seconds", time_taken);
-printf("\nCoded by Ghulam Yazdani");
+int main(){
+    int a[]={2,6,1,9,4,3,7};
+    int l=0,h = sizeof(a) / sizeof(a[0]);
+    mergeSort(a,l,h);
+    display(a,l,h);
+    return 0;
 }
