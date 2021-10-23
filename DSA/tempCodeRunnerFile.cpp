@@ -1,122 +1,85 @@
-// C++ program to implement
-// the above approach
-#include <bits/stdc++.h>
+// Merge sort in C++
+
+#include <iostream>
 using namespace std;
 
-// Function to perform the partition
-// around the pivot element
-void partition(int arr[], int N,
-			int brr[], int M,
-			int Pivot)
-{
-	// Stores index of each element
-	// of the array, arr[]
-	int l = N - 1;
+// Merge two subarrays L and M into arr
+void merge(int arr[], int p, int q, int r) {
+  
+  // Create L ← A[p..q] and M ← A[q+1..r]
+  int n1 = q - p + 1;
+  int n2 = r - q;
 
-	// Stores index of each element
-	// of the array, brr[]
-	int r = 0;
+  int L[n1], M[n2];
 
-	// Traverse both the array
-	while (l >= 0 && r < M) {
+  for (int i = 0; i < n1; i++)
+    L[i] = arr[p + i];
+  for (int j = 0; j < n2; j++)
+    M[j] = arr[q + 1 + j];
 
-		// If pivot is
-		// smaller than arr[l]
-		if (arr[l] < Pivot)
-			l--;
+  // Maintain current index of sub-arrays and main array
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = p;
 
-		// If Pivot is
-		// greater than brr[r]
-		else if (brr[r] > Pivot)
-			r++;
+  // Until we reach either end of either L or M, pick larger among
+  // elements L and M and place them in the correct position at A[p..r]
+  while (i < n1 && j < n2) {
+    if (L[i] <= M[j]) {
+      arr[k] = L[i];
+      i++;
+    } else {
+      arr[k] = M[j];
+      j++;
+    }
+    k++;
+  }
 
-		// If either arr[l] > Pivot
-		// or brr[r] < Pivot
-		else {
-			swap(arr[l], brr[r]);
-			l--;
-			r++;
-		}
-	}
+  // When we run out of elements in either L or M,
+  // pick up the remaining elements and put in A[p..r]
+  while (i < n1) {
+    arr[k] = L[i];
+    i++;
+    k++;
+  }
+
+  while (j < n2) {
+    arr[k] = M[j];
+    j++;
+    k++;
+  }
 }
 
-// Function to merge
-// the two sorted array
-void Merge(int arr[], int N,
-		int brr[], int M)
-{
-	// Stores index of each element
-	// of the array arr[]
-	int l = 0;
+// Divide the array into two subarrays, sort them and merge them
+void mergeSort(int arr[], int l, int r) {
+  if (l < r) {
+    // m is the point where the array is divided into two subarrays
+    int m = l + (r - l) / 2;
 
-	// Stores index of each element
-	// of the array brr[]
-	int r = 0;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
 
-	// Stores index of each element
-	// the final sorted array
-	int index = -1;
-
-	// Stores the pivot element
-	int Pivot = 0;
-
-	// Traverse both the array
-	while (index < N && l < N && r < M) {
-
-		if (arr[l] < brr[r]) {
-			Pivot = arr[l++];
-		}
-		else {
-			Pivot = brr[r++];
-		}
-		index++;
-	}
-
-	// If pivot element is not found
-	// or index < N
-	while (index < N && l < N) {
-		Pivot = arr[l++];
-		index++;
-	}
-
-	// If pivot element is not found
-	// or index < N
-	while (index < N && r < M) {
-		Pivot = brr[r++];
-		index++;
-	}
-
-	// Place the first N elements of
-	// the sorted array into arr[]
-	// and the last M elements of
-	// the sorted array into brr[]
-	partition(arr, N, brr,
-			M, Pivot);
-
-	// Sort both the arrays
-	sort(arr, arr + N);
-
-	sort(brr, brr + M);
-
-	// Print the first N elements
-	// in sorted order
-	for (int i = 0; i < N; i++)
-		cout << arr[i] << " ";
-
-	// Print the last M elements
-	// in sorted order
-	for (int i = 0; i < M; i++)
-		cout << brr[i] << " ";
+    // Merge the sorted subarrays
+    merge(arr, l, m, r);
+  }
 }
 
-// Driver Code
-int main()
-{
-	int arr[] = { 1, 5, 9 };
-	int brr[] = { 2, 4, 7, 10 };
-	int N = sizeof(arr) / sizeof(arr[0]);
-	int M = sizeof(brr) / sizeof(brr[0]);
-	Merge(arr, N, brr, M);
+// Print the array
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++)
+    cout << arr[i] << " ";
+  cout << endl;
+}
 
-	return 0;
+// Driver program
+int main() {
+  int arr[] = {6, 5, 12, 10, 9, 1};
+  int size = sizeof(arr) / sizeof(arr[0]);
+
+  mergeSort(arr, 0, size - 1);
+
+  cout << "Sorted array: \n";
+  printArray(arr, size);
+  return 0;
 }

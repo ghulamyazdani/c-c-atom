@@ -1,23 +1,11 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-int mergeSort(int a[], int l, int h)
-{
-    int mid;
-    if (l < h)
-    {
-        mid = (l + h) / 2;
-        mergeSort(a, l, mid);
-        mergeSort(a, mid + 1, h);
-        merge(a, l, mid, h);
-    }
-    return 0;
-}
 int merge(int a[], int l, int mid, int h)
 {
     int i = l;
-    int j = mid + 1, k = 0, c[h];
+    int j = mid + 1, k = l, c[100];
 
-    while (i <= mid && j <= h)
+    while (i < mid && j < h)
     {
         if (a[i] < a[j])
         {
@@ -38,17 +26,31 @@ int merge(int a[], int l, int mid, int h)
         a[k] = c[k];
     }
 }
-int display(int a[],int l,int h){
-    for (size_t i = 0; i < h; i++)
+
+int mergeSort(int a[], int l, int h)
+{
+    int mid;
+    if (l < h)
     {
-        cout << a[i] ;
+        mid = l + (h-1) / 2;
+        mergeSort(a, l, mid);
+        mergeSort(a, mid + 1, h);
+        merge(a, l, mid, h);
     }
-    return 0;
 }
-int main(){
-    int a[]={2,6,1,9,4,3,7};
-    int l=0,h = sizeof(a) / sizeof(a[0]);
-    mergeSort(a,l,h);
-    display(a,l,h);
-    return 0;
+int printArray(int a[], int h)
+{
+    for (size_t i = 0; i < h ; i++)
+    {
+        cout<<a[i];
+    }
+    
+}
+int main()
+{
+    int a[] = {2, 6, 1, 9, 4, 3, 7};
+    int l = 0, h = sizeof(a) / sizeof(a[0]);
+    
+    mergeSort(a, l, h);
+    printArray(a, h);
 }
