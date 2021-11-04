@@ -5,6 +5,7 @@ class thisop{
         int a;
         thisop(int a){
             this->a=a;
+            //this is keyword which is used to access the member of the class.
         }
         void display(){
             cout<<"a="<<a<<endl;
