@@ -2,35 +2,43 @@
 #include "author.h"
 #include "publisher.h"
 
-
-class Book {
+class Book
+{
 public:
-  typedef const Author* AuthorPosition;
+  typedef const Author *AuthorPosition;
 
-  Book (Author);                       // for books with single authors
-  Book (const Author[], int nAuthors); // for books with multiple authors
+  Book(Author);                       // for books with single authors
+  Book(const Author[], int nAuthors); // for books with multiple authors
 
+  std::string getTitle() 
+  const { 
+    return title;
+     }
 
-  std::string getTitle() const        { return title; }
+  void setTitle(std::string theTitle) 
+  { 
+    title = theTitle;
+     }
 
-  void setTitle(std::string theTitle) {  title = theTitle; }
+  int getNumberOfAuthors()
+   const {
+      return numAuthors; 
+      }
 
-  int getNumberOfAuthors() const { return numAuthors; }
-
-  std::string getISBN() const  { return isbn; }
+  std::string getISBN()
+   const { return isbn; }
   void setISBN(std::string id) { isbn = id; }
 
   Publisher getPublisher() const { return publisher; }
-  void setPublisher(const Publisher& publ) { publisher = publ; }
+  void setPublisher(const Publisher &publ) { publisher = publ; }
 
   AuthorPosition begin() const;
   AuthorPosition end() const;
 
-  void addAuthor (AuthorPosition at, const Author& author);
-  void removeAuthor (AuthorPosition at);
+  void addAuthor(AuthorPosition at, const Author &author);
+  void removeAuthor(AuthorPosition at);
 
 private:
-
   std::string title;
   int numAuthors;
   std::string isbn;
@@ -38,5 +46,4 @@ private:
 
   static const int MAXAUTHORS = 12;
   Author authors[MAXAUTHORS];
-
 };
