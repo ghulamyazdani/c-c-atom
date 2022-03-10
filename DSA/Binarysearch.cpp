@@ -1,13 +1,13 @@
 #include<iostream>
 using namespace std;
 int BinarySearch(int *,int,int);
-int main(int argc, char const *argv[])
+int main()
 {
     int a[20],end,num;
-    
+
     cout<<"Enter Number Of Elements"<<"\n";
     cin>>end;
-    
+
 
     cout<<"Enter sorted list";
     for (size_t i = 0; i < end; i++)
@@ -26,11 +26,11 @@ int BinarySearch(int arr[],int n,int val)
     while (count==0&&first<=last)
     {
         mid=(first+last)/2;
-         if (arr[mid]==val)
+   if (arr[mid]==val)
     {
         cout<<"Elemt is at postion :"<<mid+1<<"and Index:"<<mid;
         count++;
-        
+
     }
     else if (arr[mid]>val)
     {
@@ -44,5 +44,3 @@ int BinarySearch(int arr[],int n,int val)
     }
     }
 }
-
-
